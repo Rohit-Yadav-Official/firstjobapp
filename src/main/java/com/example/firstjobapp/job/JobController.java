@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+@RequestMapping("/jobs")
 @RestController
 public class JobController {
 
@@ -17,17 +17,17 @@ public class JobController {
         this.jobService = jobService;
    }
 
-    @GetMapping ("/jobs")
+    @GetMapping
       public List<Job> findALL(){
           return jobService.findALL();
       }
-    @PostMapping ("/jobs")
+    @PostMapping
     public String PostJob(@RequestBody Job job){
         String s=jobService.PostJob( job);
         return s;
     }
 
-    @GetMapping("/jobs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Job> findJobById(@PathVariable Long id){
        Job job= jobService.findJobById(id);
         if(job!=null){
@@ -35,7 +35,7 @@ public class JobController {
         };
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("/jobs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long id){
         boolean delete= jobService.DeleteJobById(id);
         if(delete) {
@@ -45,7 +45,7 @@ public class JobController {
         return new ResponseEntity<>("Job deletion failed", HttpStatus.NOT_FOUND);
 
     }
-    @PutMapping("/jobs/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateJobById(@PathVariable Long id, @RequestBody Job job){
        boolean update= jobService.updateJobById(id,job);
        if(update) {
