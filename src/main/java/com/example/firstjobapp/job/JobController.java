@@ -2,6 +2,8 @@ package com.example.firstjobapp.job;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -26,9 +28,30 @@ public class JobController {
     }
 
     @GetMapping("/jobs/{id}")
-    public Job findJobById(@PathVariable Long id){
+    public ResponseEntity<Job> findJobById(@PathVariable Long id){
        Job job= jobService.findJobById(id);
-        return job;
+        if(job!=null){
+            return new ResponseEntity<>(job, HttpStatus.OK);
+        };
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @DeleteMapping("/jobs/{id}")
+    public ResponseEntity<String> deleteJobById(@PathVariable Long id){
+        boolean delete= jobService.DeleteJobById(id);
+        if(delete) {
+
+           return new ResponseEntity<>("Job deleted", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Job deletion failed", HttpStatus.NOT_FOUND);
+
+    }
+    @PutMapping("/jobs/{id}")
+    public ResponseEntity<String> updateJobById(@PathVariable Long id, @RequestBody Job job){
+       boolean update= jobService.updateJobById(id,job);
+       if(update) {
+           return new ResponseEntity<>("Job updated", HttpStatus.OK);
+       }
+        return new ResponseEntity<>("Job updated", HttpStatus.NOT_FOUND);
     }
 
 }
