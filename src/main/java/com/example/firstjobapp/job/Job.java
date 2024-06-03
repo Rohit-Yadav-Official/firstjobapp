@@ -1,6 +1,14 @@
 package com.example.firstjobapp.job;
 
+
+import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
+@Entity
+@Table(name="job_table")
 public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private  Long id;
     private String title;
@@ -15,6 +23,10 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public Job() {
+
     }
 
     public Long getId() {

@@ -1,6 +1,7 @@
 package com.example.firstjobapp.job.Imp;
 
 import com.example.firstjobapp.job.Job;
+import com.example.firstjobapp.job.JobRepository;
 import com.example.firstjobapp.job.JobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,14 +10,18 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class  JobServiceImpl implements  JobService {
-   private List<Job> jobs = new ArrayList<>();
+   JobRepository jobRepository;
+   public JobServiceImpl(JobRepository jobRepository) {
+       this.jobRepository = jobRepository;
+   }
     @Override
     public List<Job> findALL(){
 
-        return jobs;
+        return jobRepository.findAll();
 
     }
 
@@ -25,38 +30,29 @@ public class  JobServiceImpl implements  JobService {
     @Override
     public String PostJob(Job job){
 
-          jobs.add(job);
+          jobRepository.save(job);
           return "job added sucessfully";
     }
 
     @Override
     public Job findJobById(Long id){
 
-        for(Job job:jobs){
-                if(job.getId().equals(id)){
-                    return job;
-                }
-        }
-        return null;
+         return jobRepository.findById(id).orElse(null);
+       // return job;
     }
 
 
     @Override
     public boolean DeleteJobById(Long id){
-        for(Job job:jobs){
-            if(job.getId().equals(id)){
-                jobs.remove(job);
-                return true;
-            }
-        }
-        return false;
+        jobRepository.deleteById(id);
+        return jobRepository.existsById(id);
     }
     @Override
     public  boolean updateJobById( Long id,Job job){
 
-        for(Job job1:jobs){
-            if(job1.getId().equals(id)) {
-
+        Optional<Job> jobOptional=jobRepository.findById(id);
+            if(jobOptional.isPresent()) {
+               Job job1=jobOptional.get();
                 job1.setTitle(job.getTitle());
                 job1.setDescription(job.getDescription());
                 job1.setMinSalary(job.getMinSalary());
@@ -64,8 +60,10 @@ public class  JobServiceImpl implements  JobService {
                 job1.setLocation(job.getLocation());
                 return true;
             }
-        }
         return false;
+        }
+
+
     }
 
-}
+
