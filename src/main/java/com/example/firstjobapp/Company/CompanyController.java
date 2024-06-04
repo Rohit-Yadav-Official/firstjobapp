@@ -20,7 +20,7 @@ public class CompanyController {
       return companyService.getAllCompanies();
    }
    @PutMapping("/{id}")
-   public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company company){
+   public ResponseEntity<String> updateCompanyId(@PathVariable Long id, @RequestBody Company company){
        boolean update= companyService.updateCompany(company,id);
        if(update) {
            return new ResponseEntity<>("Job updated", HttpStatus.OK);
