@@ -1,8 +1,12 @@
 package com.example.firstjobapp.job;
 
 
+import com.example.firstjobapp.Company.Company;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="job_table")
@@ -23,11 +27,16 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+
     }
 
     public Job() {
 
     }
+    @ManyToOne
+    private Company company;
+
+    //List<Company> ;
 
     public Long getId() {
         return id;
