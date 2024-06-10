@@ -18,10 +18,11 @@ public class Company {
 
 
     @OneToMany(mappedBy = "company")
-    @JsonIgnore
-    List<Job> Jobs;
+
+   List<Job> Jobs;
 
     @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<Reviews> reviews;
     public Company() {
     }

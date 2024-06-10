@@ -34,9 +34,18 @@ public class Job {
 
     }
     @ManyToOne
+
     private Company company;
 
     //List<Company> ;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Long getId() {
         return id;

@@ -36,4 +36,9 @@ public class CompanyServiceImpl implements CompanyService {
        // return true;
     }
 
+    public Optional<Company> findCompanyById(Long id) {
+        return companyRepository.findById(id);
+
+
+    }
 }
