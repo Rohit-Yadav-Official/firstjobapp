@@ -2,6 +2,7 @@ package com.example.firstjobapp.job;
 
 
 import com.example.firstjobapp.Company.Company;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
@@ -20,22 +21,24 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
-    public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
+    @ManyToOne
+    private Company company;
+
+    public Job(Long id, String title, String description, String minSalary, String maxSalary, String location, Company company) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+        this.company = company;
 
     }
 
     public Job() {
 
     }
-    @ManyToOne
 
-    private Company company;
 
     //List<Company> ;
 

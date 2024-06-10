@@ -31,14 +31,14 @@ public class CompanyController {
    public ResponseEntity<String> updateCompany( @RequestBody Company company,@PathVariable Long id){
        boolean update= companyService.updateCompany(company,id);
        if(update) {
-           return new ResponseEntity<>("Job updated", HttpStatus.OK);
+           return new ResponseEntity<>("company updated", HttpStatus.OK);
        }
-       return new ResponseEntity<>("Job updated", HttpStatus.NOT_FOUND);
+       return new ResponseEntity<>("company not updated", HttpStatus.NOT_FOUND);
    }
    @PostMapping()
     public ResponseEntity<String> addCompany(@RequestBody Company company){
         companyService.addCompany(company);
-        return new ResponseEntity<>("Job added", HttpStatus.CREATED);
+        return new ResponseEntity<>("company added", HttpStatus.CREATED);
 
    }
 

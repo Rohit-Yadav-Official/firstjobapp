@@ -16,20 +16,24 @@ public class Company {
     String Name;
     String Description;
 
-
-    @OneToMany(mappedBy = "company")
-
-   List<Job> Jobs;
-
-    @OneToMany(mappedBy = "company")
     @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private List<Job> Jobs;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Reviews> reviews;
+
     public Company() {
     }
-    public Company(Long Id, String Name, String Description) {
+    public Company(Long Id, String Name, String Description, List<Job> Jobs, List<Reviews> reviews) {
         this.Id = Id;
         this.Name = Name;
         this.Description = Description;
+        this.Jobs = Jobs;
+        this.reviews = reviews;
+
     }
 
     public List<Job> getJobs() {
