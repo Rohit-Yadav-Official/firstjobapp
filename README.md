@@ -38,12 +38,19 @@ Ensure you have the following installed on your local machine:
    ```bash
    git clone https://github.com/yourusername/job-app-project.git
    cd job-app-project
-cp .env.example .env
 
-POSTGRES_USER=your_db_user
-POSTGRES_PASSWORD=your_db_password
-POSTGRES_DB=your_db_name
-PGADMIN_DEFAULT_EMAIL=your_pgadmin_email
-PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
+2. **create and configure the .env file**
+   ```bash
+  
+   cp .env.example .env
 
-docker-compose up -d
+3. **Update the .env file with your preferred settings:**
+    ```bash
+    POSTGRES_USER=your_db_user
+    POSTGRES_PASSWORD=your_db_password
+    POSTGRES_DB=your_db_name
+    PGADMIN_DEFAULT_EMAIL=your_pgadmin_email
+   PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
+4. **Start the containers**
+   ```bash
+   docker-compose up -d
