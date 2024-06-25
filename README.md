@@ -24,7 +24,9 @@ Ensure you have the following installed on your local machine:
 
 .
 ├── docker-compose.yml
+
 ├── .env
+
 └── README.md
 
 - `docker-compose.yml`: Docker Compose file for defining and running multi-container Docker applications.
@@ -54,3 +56,19 @@ Ensure you have the following installed on your local machine:
 4. **Start the containers**
    ```bash
    docker-compose up -d
+
+##Usage
+
+ 1.Access PostgreSQL
+
+ 2.The PostgreSQL server will be available at localhost on port 5432.
+
+3.You can connect to it using any PostgreSQL client with the credentials provided in the .env file.
+
+ 4.Access pgAdmin
+
+5.pgAdmin will be available at http://localhost:5050.
+
+6.Log in using the email and password specified in the .env file.
+
+
